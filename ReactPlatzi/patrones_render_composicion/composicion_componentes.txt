@@ -1,0 +1,96 @@
+Qué es composición de componentes y colocación del estado
+Apuntes
+La Composición de componentes indica que cada componente debe darnos mucha libertad para elegir donde y como usarlo
+Cada componente debe realizar una tarea en específica, pero no debe de decirnos como usar esa solución que nos brinda, debe de ser flexible al momento de utilizarlo
+Nos permitirá
+Tener componentes mucho más fáciles de integrar al resto de componentes
+Nos facilitará reutilizar o hacer cambios en nuestros componentes
+Ejemplo
+
+Una solución para renderizar una tarea podría ser este componente
+
+const App = () => (
+	<TodoList todos={todos} />
+);
+const TodoList = ({todos}) => (
+	<section>
+		{todos.map(todo => (
+			<TodoItem {...todo} />
+		))}
+	</section>
+)
+Existe otra forma de realizar esta tarea, y es que el componente App tenga también la tarea de renderizar cada tarea, esta manera nos dará mayor flexibilidad con el componente de TodoList
+
+const TodoList = ({children}) => (
+	<section>
+		{children}
+	</section>
+)
+const App = () => (
+	<TodoList>
+		{todos.map(todo => (
+			<TodoItem {...todo} />
+		))}
+	</TodoList>
+);
+Colocación del estado
+¿Dónde va tu estado?
+
+Máxima cercanía a la relevancia
+El estado ira según al área donde se aplique el mismo
+Stateful vs. stateless
+Se refiere a no tener revuelo entre componentes que manejan lógica y estado con los componentes que solo renderizan elementos
+Se puede usar ambos principios siempre si los entendemos muy bien
+
+Pensar en lo más grande y poco a poco ir a lo más especifico
+
+¿Necesitas React Context?
+Al usar composición de componentes puede ser una alternativa interesante en caso de que el árbol de componentes no sea demasiado profundo.
+
+Ventajas
+
+No será necesario pasar props por cada componente intermedio entre donde se encuentre el dato inicialmente hasta su destino
+Podrás entender la aplicación con entender lo que está pasando en un archivo
+Ejemplo
+
+const App = () => {
+	const [state, setState] = useState();
+	return (
+		<>
+			<TodoHeader>
+				<TodoCounter />
+				<TodoSearch onSearch={setState} />
+			</TodoHeader>
+			<TodoList>
+				{state.todos.map(todo => <TodoItem {...todo} {...state} />)}
+			</TodoList>
+		</>
+	);
+}
+Puedes observar que el componente se puede comunicar sin mucha complicación directamente con sus componentes hijos, nietos o incluso bisnietos.
+
+De esta manera se está reduciendo la complejidad de los componentes intermedios
+Además que se puede observar legibilidad con solo ver un archivo
+Pero esta manera es insostenible en el caso que el árbol de componentes sea muy grande, pero aún se puede utilizar composición de componentes al utilizar React context
+
+
+
+
+8.-Qué son las render props y render functions
+–
+Nos ayudan a elevar nuestra composición de componentes a otro nivel.
+
+–
+Las render props nos permiten ser más específicos sobre que vamos a renderizar, cuando y donde vamos a renderizar cada parte del contenido de nuestros componentes.
+
+–
+Render Function
+
+–
+Es el patrón de entregar la información de nuestro componente en una función. No es exclusivo de react context, nosotros podemos crear nuestros propios componentes que usen este patrón, que reciban una función para que le podamos enviar la información que queremos proveer y luego si, renderizar los componentes que ya tienen la info gracias a la función.
+
+–
+Render Props
+
+–
+Cuando ya no mandamos la función dentro del componente, si no que la enviamos en alguna otra propiedad del componente. Podemos jugar con este patrón para que compartir información sea más divertido.

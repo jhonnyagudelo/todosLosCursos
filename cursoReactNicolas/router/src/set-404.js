@@ -1,0 +1,32 @@
+import { Switch, Route, Link } from "react-router-dom";
+
+function App() {
+  return (
+    <section>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Inicio</Link>
+          </li>
+
+          <li>
+            <Link to="/perfil">Perfil</Link>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <Switch>
+          <Route exact path="/">
+            <h1>Inicio</h1>
+          </Route>
+          <Route exact path="/perfil">
+            <h1>perfil</h1>
+          </Route>
+          <Route path="*">404: ruta no encontrada</Route>
+        </Switch>
+      </section>
+    </section>
+  );
+}
+
+export { App };

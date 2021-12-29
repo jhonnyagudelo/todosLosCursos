@@ -1,0 +1,53 @@
+1.	npm init 
+2.	npm init -y
+3.	npm set init.author.email
+4.	npm set init.author.name
+5.	npm set init.author.license
+6.	npm install nombreDelPaquete
+7.	Es igual que:
+		npm install nombreDelPaquete --save
+8.	también es equivalente a:
+		npm i nombreDelPaquete -S
+9.	npm list -g --depth 0
+Revisar que paquetes disponen de nuevas versiones
+npm outdate
+
+Para ver un output más detallado
+npm outdate --dd
+
+Actualizar los paquetes que no están en la ultima versión
+npm update
+
+Actualizar un paquete especifico
+npm install json-server@latest
+
+#Eliminar paquetes
+
+Eliminar un paquete de node_modules y del archivo package.json
+npm uninstall json-server
+
+Desinstalar un paquete de todo node_modules pero no del archivo package.json
+npm uninstall webpack --no-save
+
+#revisar errores de node
+npm run [comando] --dd
+
+#Limpiar cache
+npm cache clear --force
+
+#Verificar cache
+npm cache verify
+
+
+
+npm audit para ver las vulnerabilidades que tenemos en nuestro proyecto
+
+npm audit --json nos genera un json con información un poco mas detallada de lo que esta pasando con estos paquetes que instalamos
+
+una ves sepamos cual es la vulnerabilidad podemos proceder a actualizar cualquiera de los paquetes ejem: npm update eslint-utils --depth 2 esto para instalar todas sus dependencias
+
+npm audit fix es para solucionar las vulnerabilidades que tengamos en nuestro proyecto básicamente, actualiza a la ultima version nuestros paquetes con las dependencias que requieren, 
+después de esto volvemos a correr npm audit para ver que ya no tenemos vulnerabilidades.
+
+
+también hay una herramienta que garantiza que estemos siempre actualizados con nuestras dependencias del proyecto y es snyk.io

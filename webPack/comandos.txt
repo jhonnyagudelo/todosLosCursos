@@ -1,0 +1,304 @@
+1. instar webpack: npm install webpack webpack-cli -D
+2. npx webpack
+3. modos para trabajar npm webpack --mode development ó --mode production
+4. crear un archivo webpack.config.js
+		const path = require("path");
+
+		module.exports = {
+			entry: "./src/index.js",
+			output: {
+				path: path.resolve(__dirname, "dist"),
+				filename: "main.js",
+    		//filename: "[name][contenthash].js",
+			},
+			resolve: {
+				extensions: [".js"],
+			},
+		};
+
+5. npx webpack --mode production --config webpack.config.js
+6. en package.json ---- crear un script "build": "webpack --mode production",
+
+----------------- INTEGRAL BABEL PARA QUE SIRVA EN TODOS LOS NAVEGADORES *----------
+7. npm install -D babel-loader @babel/core @babel/preset-env @babel/plugin-transform-runtime @babel/preset-react 
+--- plugin-transform es para que sirva mejor async - await
+
+8. crear un archivo .babelrc para configurarlo
+		{
+			"presets": [
+				"@babel/preset-env"
+			],
+			"plugins": [
+				"@babel/plugin-transform-runtime"
+			]
+		}
+
+9. incluir esto en webpack.config
+			
+		module: {
+			rules: [
+				{
+					// expresion reguklar para trabajar con varias extenciones
+					test: /\.m?js$/,
+					exclude: /node_module/,
+					use: {
+						loader: "babel-loader",
+					},
+				},
+			],
+		},
+
+10. HtmlWebpackPlugin
+Es un plugin para inyectar javascript, css, favicons, y nos facilita la tarea de enlazar los bundles a nuestro template HTML.
+
+Instalación
+npm
+
+npm i html-webpack-plugin -D
+
+11.ingresar a package 'dev':'webpack --mode development',
+12. instalar npm i mini-css-extract-plugin css-loader -D ------ esto es para trabajar con archivos css
+13. borrar link de css del archivo original del html
+14. ir a index.js de la raiz e importar el archivo css
+15. configurar el archivo de webpack
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+			{
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+
+y las reglas son: new MiniCssExtractPlugin(),
+ 
+16 opcional ------ trabajar con preprocesadores
+	SASS ---> npm i -D node-sass sass-loader
+
+			{
+        test: /\.s?css$/,
+        use: [MiniCssExtractPlugin.loader,
+            "css-loader",
+            "sass-loader"]
+      },
+
+17.--------------- Copia de archivos con webpack -------
+npm install copy-webpack-plugin -D
+18. configurar el archivo webpack
+
+		const CopyPlugin = require("copy-webpack-plugin");
+		new CopyPlugin({
+					patterns: [
+						{
+							from: path.resolve(__dirname, "src", "assets/images"),
+							to: "assets/images",
+						},
+					],
+				}),
+
+19. --------- Mover y descargar font para el proyecto -*---------
+
+---http://google-webfonts-helper.herokuapp.com/fonts/ubuntu?subsets=cyrillic,latin
+
+		@font-face {
+			font-family: "Ubuntu";
+			src: url("../assets/fonts/ubuntu-regular.woff2") format("woff2"),
+				url("../assets/fonts/ubuntu-regular.woff") format("woff");
+			font-weight: 400;
+			font-style: normal;
+		}
+
+20. vamos a install url-loader file-loader -D
+				{
+        	test: /\.(woff|woff2)$/,
+        	use: {
+          loader: "url-loader",
+          options: {
+            limit: 10000,
+            MimeType: "application/font-woff",
+            name: "[name].[ext]",
+            outputPath: "./assets/fonts/",
+            publicPath: "./assets/fonts/",
+            esModule: false,
+        },
+
+21. minificar mas el proyecto
+	npm	install css-minimizer-webpack-plugin terser-webpack-plugin -D
+Agregar en el archivo de config webpack
+
+	const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+	const TerserPlugin = require("terser-webpack-plugin");
+
+
+  optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+  },
+
+
+22. -----Alias-----
+
+ resolve: {
+    extensions: [".js"],
+    alias: {
+      "@util": path.resolve(__dirname, "src/utils/"),
+      "@template": path.resolve(__dirname, "src/templates/"),
+      "@styles": path.resolve(__dirname, "src/styles/"),
+      "@images": path.resolve(__dirname, "src/assets/images/"),
+    },
+		
+
+import instagram from "@assets/images/instagram.png";
+
+23. Variables de entorno
+	npm install dotenv-webpack -D
+	crear 2 archivos .env y .env-example
+
+24. Modo desarrollo
+creat un archivo webpack.config.dev.js
+copiar todo lo del otro archivo y agregar 
+
+  mode: "development",
+
+en package.json agregar
+"dev": "webpack --config webpack.config.dev.js"
+
+
+25. modo produccion ------ cleaner
+	npm install clean-webpack-plugin -D
+	
+	agregar estas lineas en el archivo webpack.config.js
+
+	const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+	new CleanWebpackPlugin(),
+
+26. modo watch
+es para escuchar los cambios delñ proyecto y asi mismo se compile 
+agregar la linea en webpack.config.dev.js
+watch: true
+
+27. deploy a netlify
+crear un archivo de netlify.toml
+	[build]
+	publish = "dist/"
+	command = 	"npm run build"
+
+28. webpack dev server: es para tener un servidor en tiempo real
+
+	npm install webpack-dev-server -D 
+
+	devServer: {
+			static: path.join(__dirname, 'dist'),
+			compress: true,
+			historyApiFallback: true,
+			port: 3006,
+			open: true
+		}
+
+
+29. webpack bundle analyzer:
+	npm install webpack-bundle-analyzer -D 
+
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer");
+    new BundleAnalyzerPlugin(),
+		En consola
+npx webpack --profile --json > stats.json
+npx webpack-bundle-analyzer stats.json ----> mriar el resultado
+
+
+
+
+------------------------------------------------------------Para REACT-------------------------------------
+npm install @babel/core @babel/preset-env @babel/preset-react babel-loader -D
+crear archibo .babelrc
+
+{
+	"presets": [
+		"@babel/preset-env",
+		"@babel/preset-react"
+	]
+}
+
+npm install webpack webpack-cli webpack-dev-server -D 
+
+crear archivo webpack.config.js
+
+npm install html-loader html-webpack-plugin -D
+npm install mini-css-extract-plugin css-loader style-loader sass sass-loader -D
+npm install css-minimizer-webpack-plugin terser-webpack-plugin clean-webpack-plugin -D
+
+ npm install -g eslint
+npm install eslint babel-eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
+crear un archivo .eslintrc
+{
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": 0,
+    "no-underscore-dangle": 0,
+    "import/imports-first": [
+      "error",
+      "absolute-first"
+    ],
+    "import/newline-after-import": "error"
+  },
+  "globals": {
+    "window": true,
+    "document": true,
+    "localStorage": true,
+    "FormData": true,
+    "FileReader": true,
+    "Blob": true,
+    "navigator": true
+  },
+  "parser": "babel-eslint"
+}
+
+
+npm install prettier eslint-plugin-prettier eslint-config-prettier
+Creamos un archivo con el nombre .prettierrc y realizamos la siguiente configuración:
+
+{
+  "trailingComma": "es5",
+  "semi": true,
+  "singleQuote": true
+}
+
+
+agregamor esto al package.json
+
+	 "format":"prettier --write '{ *.js, src/**/*.{js,jsx} }'",
+    "lint":"eslint src/ --fix"
+
+npm install husky --save-dev
+ "husky": {
+    "hooks": {
+      "pre-commit": "npm test", 
+      "pre-push": "npm test",
+      "...": "..."
+    }
+  }
+
+
+npm install react-router-dom --save
+
+npm i react-helmet --save
+
+npm i react-icons
+
+
+npm i intersection-observer
+npm i @babel/plugin-syntax-dynamic-import -D
+npm i babel-eslint -D

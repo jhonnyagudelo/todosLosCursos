@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Figura geometricas</title>
+  </head>
+  <body>
+    <main>
+      <h1>Figuras geometricas</h1>
+      <section>
+        <h2>Calcula el area de un cuadraro</h2>
+        <form action="index_submit" accept-charset="utf-8">
+          <label for="cuadrado"
+            >Escribe cuanto mide cada lado de tu cuadrado:</label
+          >
+          <input id="cuadrado" type="number" />
+          <p id="respuesta">Respuesta:</p>
+          <button type="button" onclick="calcularPerimetroCuadraro()">
+            Perimetro
+          </button>
+          <button id="area" type="button" onclick="calcularAreaCuadrado()">
+            Area
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+  <script src="./index.js"></script>
+</html>
