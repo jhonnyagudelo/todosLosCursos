@@ -15,7 +15,7 @@ function useLocalStorage(itemName, initialValue) {
   const onSuccess = (item) => {
     dispatch({
       type: actionTypes.success,
-      payload: item + 1,
+      payload: item,
     });
   };
 
@@ -59,10 +59,7 @@ function useLocalStorage(itemName, initialValue) {
       onSave(newItem);
       //setItem(newItem);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      onError(error);
     }
   };
 
