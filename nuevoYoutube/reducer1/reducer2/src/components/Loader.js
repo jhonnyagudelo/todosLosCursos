@@ -7,7 +7,7 @@ const Loader = () => {
       <div></div>
       <div></div>
       <div></div>
-      <div></div>
+      Lazy Loading <div></div>
     </div>
   );
 };
