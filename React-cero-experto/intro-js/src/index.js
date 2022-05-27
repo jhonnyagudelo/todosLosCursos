@@ -1,28 +1,8 @@
-console.log("Hola mundo!!");
+const activo = true;
 
-//desestructuracion
-// Asinganacion desestructurante
+//const mensaje = (activo) ? 'Activo' : 'Inactivo';
+//const mensaje = (activo) ? 'Activo' : null
 
-const persona = {
-  nombre: "Tony",
-  edad: 45,
-  clave: "Iroman",
-};
-//const { nombre, edad, clave } = persona;
-//console.log(nombre);
+const mensaje = activo && "Activo";
 
-const retornaPersona = ({ nombre, edad, rango = "Capi" }) => {
-  console.log(nombre, edad, rango);
-};
-
-retornaPersona(persona);
-
-const usecontext = ({ clave, nombre, edad }) => {
-  return {
-    nombreClave: clave,
-    anios: edad,
-  };
-};
-
-const { nombreClave, anios } = usecontext(persona);
-console.log(nombreClave, anios);
+console.log(mensaje);
