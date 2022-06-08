@@ -53,7 +53,7 @@ const SimpleForm = () => {
           variant="standard"
         />
       </form>
-      {name && <Message />}
+      {name === "123" && <Message />}
     </>
   );
 };
