@@ -1,10 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { CallbackHook } from "./memos/CallbackHook";
+//import { MemoHook } from "./memos/MemoHook";
+//import { Memorize } from "./memos/Memorize";
+//import { Layout } from "./useLayoutEffect/Layout";
+//import { RealExampleRef } from "./04-useRef/RealExampleRef";
+//import { FocusScreen } from "./04-useRef/FocusScreen";
 //import { HookApp } from "./HookApp";
 //import { CounterApp } from "./01-useState/CounterApp";
 //import { CounterWithCustomHook } from "./01-useState/CounterWithCustomHook";
 //import { FormWithCustomHook } from "./02-useEffect/FormWithCustomHook";
-import { MultipleCustomHoosk } from "./03-examples/MultipleCustomHooks";
+//import { MultipleCustomHoosk } from "./03-examples/MultipleCustomHooks";
 //import { SimpleForm } from "./useEffect/simpleForm";
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<MultipleCustomHoosk />);
+root.render(<CallbackHook />);
