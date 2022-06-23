@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { CallbackHook } from "./memos/CallbackHook";
+// import { CallbackHook } from "./memos/CallbackHook";
+import { Padre } from './07-tarea-memo/Padre';
+import './08-useReducer/intro-reducer';
 //import { MemoHook } from "./memos/MemoHook";
 //import { Memorize } from "./memos/Memorize";
 //import { Layout } from "./useLayoutEffect/Layout";
@@ -12,5 +14,5 @@ import { CallbackHook } from "./memos/CallbackHook";
 //import { FormWithCustomHook } from "./02-useEffect/FormWithCustomHook";
 //import { MultipleCustomHoosk } from "./03-examples/MultipleCustomHooks";
 //import { SimpleForm } from "./useEffect/simpleForm";
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<CallbackHook />);
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<Padre/>);

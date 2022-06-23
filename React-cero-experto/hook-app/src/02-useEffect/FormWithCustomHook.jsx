@@ -8,7 +8,8 @@ const FormWithCustomHook = () => {
     email: "",
     password: "",
   });
-  const { name, email, password } = formValues;
+  const { name, 
+    email, password } = formValues;
 
   useEffect(() => {
     console.log("email cambio");

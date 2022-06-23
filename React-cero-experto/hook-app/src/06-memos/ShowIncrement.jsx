@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@mui/material";
-const ShowIncrement = () => {
+const ShowIncrement = ({ increment}) => {
   return (
     <>
-      <Button>Incrementar</Button>
+      <Button onClick={() => increment(5)}>Incrementar</Button>
     </>
   );
 };
