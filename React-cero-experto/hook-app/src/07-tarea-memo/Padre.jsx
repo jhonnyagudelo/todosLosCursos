@@ -1,4 +1,4 @@
-import React,{memo, useCallback} from 'react'
+import React,{useCallback} from 'react'
 import { Hijo } from './Hijo'
 import { useState } from 'react';
 
@@ -13,22 +13,24 @@ export const Padre = () => {
 
 
     return (
-        <div>
-            <h1>Padre</h1>
-            <p> Total: { valor } </p>
+        <>
+            <div>
+                <h1>Padre</h1>
+                <p> Total: { valor } </p>
 
-            <hr />
+                <hr />
 
-            {
-                numeros.map( n => (
-                    <Hijo 
-                        key={ n }
-                        numero={ n }
-                        incrementar={ incrementar }
-                    />
-                ))
-            }
-            {/* <Hijo /> */}
-        </div>
+                {
+                    numeros.map( n => (
+                        <Hijo 
+                            key={ n }
+                            numero={ n }
+                            incrementar={ incrementar }
+                        />
+                    ))
+                }
+                {/* <Hijo /> */}
+            </div>
+        </>
     )
 }
