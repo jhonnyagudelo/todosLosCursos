@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 // import { CallbackHook } from "./memos/CallbackHook";
 // import { Padre } from './07-tarea-memo/Padre';
 // import './08-useReducer/intro-reducer';
@@ -14,6 +15,10 @@ import ReactDOM from "react-dom/client";
 //import { FormWithCustomHook } from "./02-useEffect/FormWithCustomHook";
 //import { MultipleCustomHoosk } from "./03-examples/MultipleCustomHooks";
 //import { SimpleForm } from "./useEffect/simpleForm";
-import TodoApp from './08-useReducer/TodoApp';
+import MainApp from './09-useContext/MainApp';
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<TodoApp/>);
+root.render(
+  <BrowserRouter>
+    <MainApp/>
+  </BrowserRouter>
+);
