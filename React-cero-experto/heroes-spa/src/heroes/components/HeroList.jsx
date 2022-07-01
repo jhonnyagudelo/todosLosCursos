@@ -1,20 +1,25 @@
-import React from "react"
+import React, { useMemo } from "react"
+import { HeroCard } from "./HeroCard";
 import { getHeroesByPublisher } from '../helpers';
-const HeroList = (publisher) => {
-  const heroes = getHeroesByPublisher(publisher);
+
+const HeroList = ({ publisher }) => {
+
+  const heroes = useMemo( () => getHeroesByPublisher(publisher), [publisher]);
+
   return (
     <>
-      <ul>
+      <article className="row rows-cols-1 row-cols-md-3 g-3">
         {
           heroes.map(hero => (
-            <li key={hero.id}>
-              {hero.superhero}
-            </li>
+            <HeroCard 
+              key={hero.id}
+              {...hero}
+            />
           ))
         }
-      </ul>
+      </article>
     </>
   )
 }
 
-export default HeroList
+export {HeroList}
