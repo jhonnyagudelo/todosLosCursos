@@ -1,16 +1,20 @@
 import React from "react"
-import { HeroCard } from '../components'
-import { useForm } from '../../hooks/useForm';
 import { useLocation, useNavigate } from "react-router-dom";
 import queryString from 'query-string';
+import { HeroCard } from '../components'
+import { useForm } from '../../hooks/useForm';
+import { getHeroesByName } from "../helpers";
 
 export const Search = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const {q = ""} = queryString.parse(location.search);
-  console.log(location.search)
 
+  const { q = '' } = queryString.parse(location.search);
+  const heroes = getHeroesByName(q);
+
+  const showSearch = (q.length === 0);
+  const showError = (q.length === 0) && heroes.length === 0;
 
 
   const { searchText, onInputChange } = useForm({
@@ -20,7 +24,7 @@ export const Search = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (searchText.trim().length <= 1) return
-    navigate(`?=${ searchText.toLowerCase().trim() }`);
+    navigate(`?q=${searchText}`);
   }
 
   return (
@@ -47,13 +51,29 @@ export const Search = () => {
         <article className="col-7" >
           <h4>Resolve</h4>
           <hr />
-          <div className="alert alert-primary">
+          {/*
+            (q === '')
+              ? <div className="alert alert-primary"> Search a hero </div>
+              : (heroes.length === 0)
+              &&
+              <div className="alert alert-danger">
+                no hero <b>{q}</b>
+              </div>
+          */}
+
+
+          <div className="alert alert-primary" style={{ display: showSearch ? "" : 'none'  }} >
             Search a hero
           </div>
-          <div className="alert alert-danger">
-            no hero <b>{}</b>
+
+          <div className="alert alert-danger" style={{ display: showError ? "" : 'none' }} >
+            no hero <b>{q}</b>
           </div>
-          {/* <HeroCard /> */}
+          {
+            heroes.map(hero => (
+              <HeroCard key={hero.id} {...hero} />
+            ))
+          }
         </article>
 
 
