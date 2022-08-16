@@ -7,13 +7,20 @@ export const EmptyUserState: UserInfo = {
   email: "",
 };
 
+export const persistLocalStorageUser = (userInfo: UserInfo) => {
+  localStorage.setItem("user", JSON.stringify({ ...userInfo }));
+};
+
 export const userSlice = createSlice({
   name: "user",
   initialState: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user") as string)
     : EmptyUserState,
   reducers: {
-    createUser: (state, action) => action.payload,
+    createUser: (state, action) => {
+      persistLocalStorageUser(action.payload);
+      return action.payload;
+    },
     updateUser: (state, action) => ({
       ...state,
       ...action.payload,
