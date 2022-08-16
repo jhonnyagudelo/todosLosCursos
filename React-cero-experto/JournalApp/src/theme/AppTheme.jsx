@@ -1,7 +1,7 @@
-import { React } from 'react'
-import { ThemeProvider } from '@emotion/react'
-import { CssBaseline } from '@mui/material';
-import { purpleTheme } from './';
+import { React } from "react";
+import { ThemeProvider } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
+import { purpleTheme } from "./";
 
 const AppTheme = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ const AppTheme = ({ children }) => {
         {children}
       </ThemeProvider>
     </>
-  )
-}
+  );
+};
 
-export { AppTheme }
+export { AppTheme };
