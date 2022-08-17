@@ -1,9 +1,13 @@
 import { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
-import { AuthGuard } from "./guards";
+import { AuthGuard, AuthRol } from "./guards";
 import { RouterWithNotFound } from "./Utilities";
 import { PublicRoutes, PrivateRoutes } from "./models";
+import { Roles } from "./models";
+import { Logout } from "./components/";
+import { Dashboard } from "./pages/Private/Dashboard/Dashboard";
+
 import store from "./redux/store";
 
 const Login = lazy(() => import("./pages/Login"));
@@ -15,13 +19,17 @@ function App() {
       <Suspense fallback={<>Cargando...</>}>
         <Provider store={store}>
           <BrowserRouter>
+            <Logout />
             <RouterWithNotFound>
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
-              <Route element={<AuthGuard />}>
+              <Route element={<AuthGuard privateValidation={true} />}>
                 <Route
                   path={`${PrivateRoutes.PRIVATE}/*`}
                   element={<Private />}
                 />
+              </Route>
+              <Route element={<AuthRol rol={Roles.ADMIN} />}>
+                <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
               </Route>
             </RouterWithNotFound>
           </BrowserRouter>
