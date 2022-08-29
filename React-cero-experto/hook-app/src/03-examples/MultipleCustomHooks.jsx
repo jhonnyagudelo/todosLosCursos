@@ -11,8 +11,7 @@ import {
   Button,
 } from "@mui/material";
 const MultipleCustomHoosk = () => {
-  const { counter, increment } = 
-    useCounter(1);
+  const { counter, increment } = useCounter(1);
   const { loading, data } = useFetch(
     `https://www.breakingbadapi.com/api/quotes/${counter}`
   );
@@ -32,7 +31,7 @@ const MultipleCustomHoosk = () => {
           <Box sx={{ p: 2, display: "flex" }}>
             <Stack spacing={5}>
               <Typography fontWeight={700}>{author}</Typography>
-              <Typography variant="body2" color ="text.secondary">
+              <Typography variant="body2" color="text.secondary">
                 {quote}
               </Typography>
             </Stack>

@@ -1,17 +1,17 @@
-import { React } from 'react'
-import { Route, Routes, Navigate } from 'react-router-dom'
-import { JournalPage} from '../pages/JournalPage'
+import { React } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { JournalPage } from "../pages/JournalPage";
 
-const JournalRoutes = ({ }) => {
+const JournalRoutes = ({}) => {
   return (
     <>
       <Routes>
-        <Route path="/" element={< JournalPage />} />
-        <Route path="/*" element={< Navigate to="/" />} />
+        <Route path="/" element={<JournalPage />} />
+        <Route path="/*" element={<Navigate to="/" />} />
         <Route />
       </Routes>
     </>
-  )
-}
+  );
+};
 
-export { JournalRoutes }
+export { JournalRoutes };

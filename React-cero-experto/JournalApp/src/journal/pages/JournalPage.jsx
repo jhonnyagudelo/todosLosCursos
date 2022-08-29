@@ -26,7 +26,7 @@ const JournalPage = ({ }) => {
     </IconButton>
       </JournalLayout>
     </>
-  )
-}
+  );
+};
 
-export { JournalPage }
+export { JournalPage };
