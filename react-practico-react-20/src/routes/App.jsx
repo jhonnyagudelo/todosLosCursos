@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@containers/Layout";
 import Home from "@pages/Home";
 import Login from "@pages/Login";
@@ -21,7 +21,7 @@ const App = () => {
     <AppContext.Provider value={initialState}>
       <BrowserRouter>
         <Layout>
-          <Switch>
+          <Routes>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route
@@ -36,7 +36,7 @@ const App = () => {
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/orders" component={Orders} />
             <Route path="*" component={NotFound} />
-          </Switch>
+          </Routes>
         </Layout>
       </BrowserRouter>
     </AppContext.Provider>
